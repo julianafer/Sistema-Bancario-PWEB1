@@ -19,14 +19,22 @@ class ContaController {
         const elementoSaldo = document.querySelector('#saldo');
         const elementoDataAniversario = document.querySelector('#dataAniversario');
         const elementoTipoDeConta = document.querySelector('#tipoDeConta');
+        const tipoDeConta = elementoTipoDeConta.value;
 
-        if (elementoTipoDeConta.value === "conta") {
-            
+        let conta;
+
+        if (tipoDeConta === "conta") {
+            conta = new Conta(elementoNumero.value, Number(elementoSaldo.value));
+        }
+        else if (tipoDeConta === "conta-bonificada") {
+            conta = new ContaBonificada(elementoNumero.value, Number(elementoSaldo.value));
+        }
+        else {
+            conta = new Poupanca(elementoNumero.value, Number(elementoSaldo.value), 
+                elementoDataAniversario.value);
         }
 
-        // const conta = new Conta(elementoNumero.value,
-        //     Number(elementoSaldo.value));
-        this.repositorioContas.adicionar(conta);
+        this.adicionarConta(conta);
         this.inserirContaNoHTML(conta);
     }
 
